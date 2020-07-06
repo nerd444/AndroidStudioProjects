@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">PCalculator</string>
+
+    <string name="enter_percent">Enter Percent:</string>
+    <string name="p_calculator">P Calculator</string>
+    <string name="percent">Enter Percent...</string>
+    <string name="enter_your_number">Enter your Number:</string>
+    <string name="enter_number">Enter Number...</string>
+    <string name="calculate_the_result">CALCULATE THE RESULT</string>
+    <string name="result">Result</string>
+
+    <string name="alert_title">"5회 완료"</string>
+    <string name="alert_maessage">"5회가 완료되어 앱을 종료합니다."</string>
+    <string name="alert_btn">"앱 종료"</string>
+</resources>
