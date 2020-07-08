@@ -18,7 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.nerd.employee.R;
 import com.nerd.employee.model.Employee;
 
-import java.util.ArrayList;public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+import java.util.ArrayList;
+
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     // 1. 멤버변수 선언 (생성자 만들기 위해)
     Context context;

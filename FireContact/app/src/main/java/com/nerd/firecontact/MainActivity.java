@@ -41,27 +41,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
 
-        db.collection("Contact").get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        for (QueryDocumentSnapshot snapshots : queryDocumentSnapshots){
-                            String id = snapshots.getId();
-                            Log.i("AAA", id);
-                            Contact contact = snapshots.toObject(Contact.class);
-                            contactArrayList.add(contact);
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                    }
-                });
-        recyclerViewAdapter = new RecyclerViewAdapter(MainActivity.this, contactArrayList);
-        recyclerView.setAdapter(recyclerViewAdapter);
-
         btn = findViewById(R.id.btn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +49,34 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //데이터베이스에서 테이블에 저장된 데이터 읽어서, 어레이리스트에 저장
+        contactArrayList.clear();
+        db.collection("Contact")
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for (QueryDocumentSnapshot snapshots : queryDocumentSnapshots){
+                            String id = snapshots.getId();
+                            Log.i("AAA",id);
+                            Contact contact = snapshots.toObject(Contact.class);
+                            contact.setId(id);
+                            contactArrayList.add(contact);
+                        }
+                        recyclerViewAdapter = new RecyclerViewAdapter(MainActivity.this, contactArrayList);
+                        recyclerView.setAdapter(recyclerViewAdapter);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+    }
+
 }
