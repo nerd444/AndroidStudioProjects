@@ -19,15 +19,17 @@
         android:gravity="center"
         android:text="@string/p_calculator"
         android:textColor="#FFE500"
-        android:textSize="50sp" />
+        android:textSize="50sp"
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/ll1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView2"
+        android:layout_marginHorizontal="15dp"
         android:orientation="horizontal"
-        android:layout_marginHorizontal="15dp">
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
@@ -57,8 +59,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll1"
+        android:layout_marginHorizontal="15dp"
         android:orientation="horizontal"
-        android:layout_marginHorizontal="15dp">
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/textView4"
@@ -67,7 +70,8 @@
             android:gravity="center_vertical"
             android:text="@string/enter_your_number"
             android:textColor="#000000"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            android:visibility="gone" />
 
         <EditText
             android:id="@+id/number"
@@ -79,7 +83,8 @@
             android:ems="10"
             android:hint="@string/enter_number"
             android:inputType="number"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:visibility="gone" />
 
     </LinearLayout>
 
@@ -89,10 +94,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll"
         android:layout_marginHorizontal="100dp"
-        android:layout_marginBottom="60dp"
         android:layout_marginTop="100dp"
+        android:layout_marginBottom="60dp"
         android:background="#F6E65A"
-        android:text="@string/calculate_the_result" />
+        android:text="@string/calculate_the_result"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/results"
@@ -103,7 +109,8 @@
         android:gravity="center"
         android:text="@string/result"
         android:textColor="#000000"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:visibility="gone" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navi"
@@ -117,6 +124,7 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/navi"
         app:defaultNavHost="true"
         app:navGraph="@navigation/my_navi" />
 

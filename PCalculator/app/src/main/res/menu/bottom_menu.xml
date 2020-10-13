@@ -5,12 +5,12 @@
     <item
         android:id="@+id/fragment1"
         android:icon="@drawable/plus"
-        android:title="더하기"
+        android:title="계산기"
         app:showAsAction="always" />
     <item
         android:id="@+id/fragment2"
         android:icon="@drawable/minus"
-        android:title="빼기"
+        android:title="뺄셈"
         app:showAsAction="always" />
     <item
         android:id="@+id/fragment3"
