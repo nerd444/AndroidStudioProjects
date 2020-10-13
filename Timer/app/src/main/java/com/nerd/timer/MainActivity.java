@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onFinish() {
                         // 타이머 완료시, 소리와 애니메이션
 
+                        txtGet.setText("");
                         mp.start();
                         YoYo.with(Techniques.Tada)
                                 .duration(700)
