@@ -17,19 +17,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.nerd.addmemo.R;
 import com.nerd.addmemo.UpdateActivity;
 import com.nerd.addmemo.data.DatabaseHandler;
-import com.nerd.addmemo.model.Contact;
+import com.nerd.addmemo.model.Memo;
 
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     // 멤버변수 셋팅
     Context context;
-    ArrayList<Contact> contactList;
+    ArrayList<Memo> memoArrayList;
 
     // 1. 생성자 만들기
-    public RecyclerViewAdapter(Context context, ArrayList<Contact> contactList){
+    public RecyclerViewAdapter(Context context, ArrayList<Memo> memoArrayList){
         this.context = context;
-        this.contactList = contactList;
+        this.memoArrayList = memoArrayList;
     }
 
 
@@ -38,7 +38,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public RecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // 첫번째 파라미터인, parent 로 부터 뷰(화면 : 하나의 셀)를 생성한다.
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.contact_row,parent,false); //inflate=만들라는 뜻
+                .inflate(R.layout.memo_row,parent,false); //inflate=만들라는 뜻
         //리턴에, 위에서 생성한 뷰를, 뷰홀더에 담아서 리턴한다.
         return new ViewHolder(view);
     }
@@ -47,9 +47,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewAdapter.ViewHolder holder, int position) {
         // 1. 해당 포지션의 데이터 가져와서
-        Contact contact = contactList.get(position);
-        String title = contact.getTitle();
-        String content = contact.getMemo();
+        Memo memo = memoArrayList.get(position);
+        String title = memo.getTitle();
+        String content = memo.getMemo();
         // 2. 뷰홀더에 있는 텍스트뷰에 문자열을 셋팅한다.
         holder.txtTitle.setText(title);
         holder.txtMemo.setText(content);
@@ -59,7 +59,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     //리스트에 있는 데이터의 객수를 리턴해줘야 한다.
     @Override
     public int getItemCount() {
-        return contactList.size();
+        return memoArrayList.size();
     }
 
 
@@ -86,13 +86,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 public void onClick(View v) {
                     //수정 엑티비티로 넘어가는 코드 작성
 
-
                     Intent i = new Intent(context, UpdateActivity.class);
                     int index = getAdapterPosition();
-                    Contact contact = contactList.get(index);
-                    int id = contact.getId();
-                    String title = contact.getTitle();
-                    String memo = contact.getMemo();
+                    Memo getMemo = memoArrayList.get(index);
+                    int id = getMemo.getId();
+                    String title = getMemo.getTitle();
+                    String memo = getMemo.getMemo();
                     i.putExtra("id",id);
                     i.putExtra("title",title);
                     i.putExtra("memo",memo);
@@ -108,21 +107,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     AlertDialog.Builder deleteAlert = new AlertDialog.Builder(context);
                     deleteAlert.setTitle("연락처 삭제");
                     deleteAlert.setMessage("정말 삭제하시겠습니까?");
-                    deleteAlert.setPositiveButton("yes.", new DialogInterface.OnClickListener() {
+                    deleteAlert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             int index = getAdapterPosition();
-                            Contact contact = contactList.get(index);
+                            Memo memo = memoArrayList.get(index);
                             DatabaseHandler db = new DatabaseHandler(context);
-                            db.deleteContact(contact);
+                            db.deleteMemo(memo);
                             // 데이터셋을 다시 가져오는 메소드
-                            contactList = db.getAllContacts();
+                            memoArrayList = db.getAllMemos();
                             // 데이터셋이 바꼈다는것을 알려주는 메소드실행.
                             notifyDataSetChanged();
                     //notifyItemchanged(index)라는 함수도 있다.
                         }
                     });
-                    deleteAlert.setNegativeButton("No", null);
+                    deleteAlert.setNegativeButton("NO", null);
                     deleteAlert.setCancelable(false);
                     deleteAlert.show();
                     return;

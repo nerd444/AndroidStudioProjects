@@ -8,8 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
-
-import com.nerd.addmemo.model.Contact;
+import com.nerd.addmemo.model.Memo;
 import com.nerd.addmemo.util.Util;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // 1. 테이블 생성문 SQLite 문법에 맞게 작성해야 한다.
         // 테이블생성문, mysql 문법 대신 SQLite 문법(varchar 대신 text, int 대신 integer, autoincrement 에 _가 없고 primary key 뒤에 와야함.) => 문법이 다 다름.
-        String CREATE_CONTACT_TABLE = "create table " + Util.TABLE_NAME +
+        String CREATE_MEMO_TABLE = "create table " + Util.TABLE_NAME +
                 "(" + Util.KEY_ID + " integer primary key autoincrement, " +
                 Util.KEY_TITLE + " text, " +
                 Util.KEY_MEMO + " text )";
@@ -34,7 +33,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // phone_number text )
 
         // 2. 쿼리 실행
-        db.execSQL(CREATE_CONTACT_TABLE);
+        db.execSQL(CREATE_MEMO_TABLE);
     }
 
     @Override
@@ -46,25 +45,25 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // 주소 저장하는 메소드 : 오버라이딩이 아니라, 우리가 만들어줘야 하는 메소드
+    // 메모 저장하는 메소드 : 오버라이딩이 아니라, 우리가 만들어줘야 하는 메소드
     // 여기서부터는 기획에 맞게 데이터베이스에 넣고, 업데이트, 가져오고, 지우고 메소드 만들기
-    public void addContact(Contact contact){
+    public void addMemo(Memo memo){
         Log.i("myDB","addContact.");
-        // 1. 주소를 저장하기 위해서, writable db 를 가져온다.
+        // 1. 메모를 저장하기 위해서, writable db 를 가져온다.
         SQLiteDatabase db = this.getWritableDatabase();
         // 2. db 에 저장하기 위해서는, ContentValues 를 이용한다.
         ContentValues values = new ContentValues();
-        values.put(Util.KEY_TITLE, contact.getTitle());
-        values.put(Util.KEY_MEMO, contact.getMemo());
+        values.put(Util.KEY_TITLE, memo.getTitle());
+        values.put(Util.KEY_MEMO, memo.getMemo());
         // 3. db 에 실제로 저장한다.
         db.insert(Util.TABLE_NAME, null, values);
         db.close();
         Log.i("myDB","inserted.");
     }
 
-    // 주소 1개 가져오는 메소드 : 우리가 만들어줘야 하는 메소드.
+    // 메모 1개 가져오는 메소드 : 우리가 만들어줘야 하는 메소드.
     // select * from contacts where id = 3;
-    public Contact getContact (int id){
+    public Memo getMemo (int id){
 
         // 1. 데이터베이스 가져온다. 조회니까, readable 한 db 로 가져온다.
         SQLiteDatabase db = this.getReadableDatabase();
@@ -84,25 +83,25 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String selectedMemo = cursor.getString(2);
 
         // db 에서 읽어온 데이터를, 자바 클래스로 처리한다.
-        Contact contact = new Contact();
-        contact.setId(selectedId);
-        contact.setTitle(selectedTitle);
-        contact.setMemo(selectedMemo);
+        Memo memo = new Memo();
+        memo.setId(selectedId);
+        memo.setTitle(selectedTitle);
+        memo.setMemo(selectedMemo);
 
-        return contact;
+        return memo;
     }
 
-    // 디비에 저장된 모든 주소록 정보를 불러오는 메소드.
-    public ArrayList<Contact> getAllContacts(){                 // ArrayList = 배열보다 진화
+    // 디비에 저장된 모든 메모 정보를 불러오는 메소드.
+    public ArrayList<Memo> getAllMemos(){                 // ArrayList = 배열보다 진화
         // 1. 비어있는 어레이 리스트를 먼저 한개 만든다.
-        ArrayList<Contact> contactList = new ArrayList<>();
+        ArrayList<Memo> memoArrayList = new ArrayList<>();
 
         // 2. 데이터베이스에 select (조회) 해서,
         String selectAll = "select * from " + Util.TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectAll, null);
 
-        // 3. 여러개의 데이터를 루프 돌면서, Contact 클래스에 정보를 하나씩 담고
+        // 3. 여러개의 데이터를 루프 돌면서, Memo 클래스에 정보를 하나씩 담고
         if (cursor.moveToFirst()){
             do {
                 int selectedId = Integer.parseInt(cursor.getString(0));
@@ -110,48 +109,48 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 String selectedMemo = cursor.getString(2);
 
                 // db 에서 읽어온 데이터를, 자바 클래스로 처리한다.
-                Contact contact = new Contact();
-                contact.setId(selectedId);
-                contact.setTitle(selectedTitle);
-                contact.setMemo(selectedMemo);
+                Memo memo = new Memo();
+                memo.setId(selectedId);
+                memo.setTitle(selectedTitle);
+                memo.setMemo(selectedMemo);
 
                 // 4. 위의 빈 어레이리스트에 하나씩 추가를 시킨다.
-                contactList.add(contact);
+                memoArrayList.add(memo);
 
             }while (cursor.moveToNext());
         }
-        return contactList;
+        return memoArrayList;
 
     }
 
     // 데이터를 업데이트 하는 메서드.
-    public int updateContact(Contact contact){
+    public int updateMemo(Memo memo){
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(Util.KEY_TITLE, contact.getTitle());
-        values.put(Util.KEY_MEMO, contact.getMemo());
+        values.put(Util.KEY_TITLE, memo.getTitle());
+        values.put(Util.KEY_MEMO, memo.getMemo());
 
         // 데이터베이스 테이블 업데이트.
-        // update contacts set title = "홍길동", content = "memo" where id = 3;
+        // update memos set title = "심부름", memo = "감자, 양파, 대파, 마늘" where id = 3;
         int ret = db.update(Util.TABLE_NAME,    // 테이블명
                 values,     // 업데이트할 값
                 Util.KEY_ID + " = ? ",      // where
-                new String[]{String.valueOf(contact.getId())});     // ?에 들어갈 값
+                new String[]{String.valueOf(memo.getId())});     // ?에 들어갈 값
         db.close();
         return ret;
     }
 
     // 데이터 삭제 메서드.
-    public void deleteContact(Contact contact){
+    public void deleteMemo(Memo memo){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(Util.TABLE_NAME,      // 테이블명
                 Util.KEY_ID + " = ? ",      // where id = ?
-                new String[]{String.valueOf(contact.getId())});     // ? 에 해당하는 값
+                new String[]{String.valueOf(memo.getId())});     // ? 에 해당하는 값
         db.close();
     }
 
-    // 테이블에 저장된 주소록 데이터의 전체 갯수를 리턴하는 메소드.
+    // 테이블에 저장된 메모 데이터의 전체 갯수를 리턴하는 메소드.
     public int getCount(){
         // select count(*) from contacts;
         String countQuery = "select * from " + Util.TABLE_NAME;
@@ -163,17 +162,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // 검색용 메소드 추가
-    public ArrayList<Contact> getLike(String search){
+    public ArrayList<Memo> getLike(String search){
         // select * from table where id = "id" like "%search%"
-//        String searchQuery = "select id, title, content from" + Util.TABLE_NAME + "where content like ? or title like ? ";
+//        String searchQuery = "select id, title, memo from" + Util.TABLE_NAME + "where memo like ? or title like ? ";
         SQLiteDatabase db = this.getReadableDatabase();
-        ArrayList<Contact> memoList = new ArrayList<>();
+        ArrayList<Memo> memoList = new ArrayList<>();
         // 메모 검색
 //        Cursor cursor = db.query(Util.TABLE_NAME,
 //                new String[]{Util.KEY_ID, Util.KEY_TITLE, Util.KEY_MEMO},
 //                Util.KEY_MEMO + " like ?", new String[]{"%" + search + "%"},
 //                null,null,null);
-        // 제목 검색
+        // 메모 검색
         Cursor cursorTitle = db.query(Util.TABLE_NAME,
                 new String[]{Util.KEY_ID, Util.KEY_TITLE, Util.KEY_MEMO},
                 Util.KEY_MEMO + " like ?", new String[]{"%" + search + "%"},
@@ -208,7 +207,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 String selectedContent = cursorTitle.getString(2);
 
                 // db 에서 읽어온 데이터를, 자바 클래스로 처리한다.
-                Contact memo = new Contact();
+                Memo memo = new Memo();
                 memo.setId(selectedId);
                 memo.setTitle(selectedTitle);
                 memo.setMemo(selectedContent);

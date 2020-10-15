@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.nerd.addmemo.data.DatabaseHandler;
-import com.nerd.addmemo.model.Contact;
+import com.nerd.addmemo.model.Memo;
 
 public class UpdateActivity extends AppCompatActivity {
     EditText updateTitle;
@@ -42,10 +42,10 @@ public class UpdateActivity extends AppCompatActivity {
                 String memo = updateMemo.getText().toString().trim();
 
                 DatabaseHandler db= new DatabaseHandler(UpdateActivity.this);
-                Contact contact = db.getContact(id);
-                contact.setTitle(title);
-                contact.setMemo(memo);          // 45~47 대신 Contact contact = new Contact(id, title, content) 라고 쓸수 있다. DB 선언 위에(43)
-                db.updateContact(contact);
+                Memo updateMemo = db.getMemo(id);
+                updateMemo.setTitle(title);
+                updateMemo.setMemo(memo);          // 45~47 대신 Contact contact = new Contact(id, title, content) 라고 쓸수 있다. DB 선언 위에(43)
+                db.updateMemo(updateMemo);
 
                 Toast.makeText(UpdateActivity.this, "수정 되었습니다", Toast.LENGTH_SHORT).show();
                 finish();

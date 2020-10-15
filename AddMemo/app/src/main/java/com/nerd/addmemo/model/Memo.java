@@ -1,18 +1,18 @@
 package com.nerd.addmemo.model;
 
-public class Contact {
+public class Memo {
     private int id;
     private String Title;
     private String Memo;
 
-    public Contact(){
+    public Memo(){
 
     }
 
-    public Contact(int id, String Title, String Memo){
+    public Memo(int id, String title, String memo) {
         this.id = id;
-        this.Title = Title;
-        this.Memo = Memo;
+        Title = title;
+        Memo = memo;
     }
 
     public int getId() {

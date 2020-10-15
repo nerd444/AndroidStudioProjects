@@ -5,24 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SecondActivity">
+    tools:context=".AddActivity">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="60dp"
+        android:layout_marginVertical="70dp"
         android:text="메모 수정"
         android:textColor="#000000"
-        android:textSize="30dp" />
+        android:textSize="40dp" />
 
     <EditText
         android:id="@+id/updateTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="60dp"
         android:ems="10"
         android:textSize="28sp"
         android:inputType="text"
@@ -33,22 +32,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:maxLines="4"
         android:ems="10"
         android:textSize="28sp"
         android:hint="메모"
-        android:inputType="text" />
+        android:inputType="textMultiLine" />
 
     <Button
         android:id="@+id/btnUpdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="180dp"
         android:background="#000000"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
         android:text="수정완료"
         android:textColor="#FFFFFF"
         android:textSize="30dp" />
