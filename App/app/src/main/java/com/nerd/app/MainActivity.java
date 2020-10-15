@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -46,12 +47,13 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onTick(long millisUntilFinished) {
                         int remainingTime = (int)millisUntilFinished / 1000;
-                        minute.setText(remainingTime);
+                        minute.setText(""+remainingTime);
                     }
 
                     @Override
                     public void onFinish() {
-
+                        minute.setText("");
+                        cho.setText("");
                     }
                 };
 
@@ -63,16 +65,33 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onTick(long millisUntilFinished) {
                         int remainingTime = (int)millisUntilFinished / 1000;
-                        cho.setText(remainingTime);
+                        cho.setText(""+remainingTime);
                     }
 
                     @Override
                     public void onFinish() {
-
+                        minute.setText("");
+                        cho.setText("");
                     }
                 };
 
+                cdt.start();
+            }
+        });
 
+        btnStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cdt.cancel();
+            }
+        });
+
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cdt.cancel();
+                minute.setText("");
+                cho.setText("");
             }
         });
 
