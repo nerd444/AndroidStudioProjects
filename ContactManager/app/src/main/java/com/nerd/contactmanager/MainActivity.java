@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.nerd.contactmanager.adapter.RecyclerViewAdapter;
 import com.nerd.contactmanager.data.DatabaseHandler;
@@ -20,6 +22,15 @@ import com.nerd.contactmanager.model.Contact;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    // 수정 다이얼로그
+    EditText editName;
+    EditText editPhone;
+    Button btnSave;
+    Button btnCancle;
+
+    int id;
+    AlertDialog dialog;
 
     RecyclerView recyclerView;      // 메인 화면에 있는 리사이클러 뷰    (이거부터아래 세개는 세트임.)
     RecyclerViewAdapter recyclerViewAdapter;        // 우리가 만든, 하나의 셀을 연결시키는 어댑터
@@ -75,7 +86,9 @@ public class MainActivity extends AppCompatActivity {
             Intent i = new Intent(MainActivity.this,AddContact.class);
             startActivity(i);
             return true;
-        }else if (id == R.id.trash_can)
+        }else if (id == R.id.trash_can){
+
+        }
 
         return super.onOptionsItemSelected(item);
     }

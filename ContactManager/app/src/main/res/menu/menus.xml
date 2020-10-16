@@ -7,6 +7,7 @@
         android:title="Item"
         app:showAsAction="always" />
     <item
+        android:id="@+id/trash_can"
         android:icon="@drawable/trash_can"
         android:title="trash_can"
         app:showAsAction="always" />

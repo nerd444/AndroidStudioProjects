@@ -90,7 +90,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(context, UpdateContact.class);
+                    Intent i = new Intent(context, MainActivity.class);
                     // 유저가 클릭한 셀의 인덱스를 가져온다. 이 인덱스만 알면, 어레이리스트에서 데이터 꺼내올 수 있다.
                     int index = getAdapterPosition();
                     Contact contact = contactList.get(index);

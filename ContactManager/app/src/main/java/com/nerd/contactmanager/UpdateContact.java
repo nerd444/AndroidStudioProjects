@@ -22,6 +22,7 @@ public class UpdateContact extends AppCompatActivity {
     EditText editName;
     EditText editPhone;
     Button btnSave;
+    Button btnCancle;
 
     int id;
 
@@ -33,6 +34,7 @@ public class UpdateContact extends AppCompatActivity {
         editName = findViewById(R.id.editName);
         editPhone = findViewById(R.id.editPhone);
         btnSave = findViewById(R.id.btnSave);
+        btnCancle = findViewById(R.id.btnCancle);
 
         // 어댑터에서, 유저가 클릭한 경우, 데이터를 받아온다.
         id = getIntent().getIntExtra("id",-1);
