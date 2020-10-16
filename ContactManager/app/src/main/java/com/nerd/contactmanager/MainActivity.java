@@ -1,13 +1,15 @@
 package com.nerd.contactmanager;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -19,7 +21,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btn;
     RecyclerView recyclerView;      // 메인 화면에 있는 리사이클러 뷰    (이거부터아래 세개는 세트임.)
     RecyclerViewAdapter recyclerViewAdapter;        // 우리가 만든, 하나의 셀을 연결시키는 어댑터
     ArrayList<Contact> contactArrayList;        // 데이터베이스에서 읽어온 주소록 정보를 저장할 리스트 (나중에 네트워크 연결해서 가져올거임)
@@ -30,21 +31,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btn = findViewById(R.id.btn);
         // 리사이클러뷰 연결하고, 기본적인 셋팅.
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 새로운 액티비티 실행.
-                Intent i = new Intent(MainActivity.this,AddContact.class);
-                startActivity(i);
-            }
-        });
-
 
     }
 
@@ -67,6 +57,27 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewAdapter = new RecyclerViewAdapter(MainActivity.this, contactArrayList);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerViewAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menus, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.add_contact){
+            // 새로운 액티비티 실행.
+            Intent i = new Intent(MainActivity.this,AddContact.class);
+            startActivity(i);
+            return true;
+        }else if (id == R.id.trash_can)
+
+        return super.onOptionsItemSelected(item);
     }
 
 }
