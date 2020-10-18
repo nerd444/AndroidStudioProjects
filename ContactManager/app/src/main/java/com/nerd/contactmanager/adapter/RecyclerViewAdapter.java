@@ -1,15 +1,12 @@
 package com.nerd.contactmanager.adapter;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.icu.text.Transliterator;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,11 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.nerd.contactmanager.MainActivity;
 import com.nerd.contactmanager.R;
-import com.nerd.contactmanager.UpdateContact;
 import com.nerd.contactmanager.data.DatabaseHandler;
 import com.nerd.contactmanager.model.Contact;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -78,6 +72,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         // 카드뷰 클릭하면 화면 넘어갈 수 있도록, 멤버 변수 셋팅
         public CardView cardView;
 
+        // 카드뷰 클릭 시 다이얼로그
+        public EditText editName;
+        public EditText editPhone;
+        public Button btnSave;
+        public Button btnCancle;
+
+        public int id;
+        public AlertDialog dialog;
+
         public ViewHolder(@NonNull final View itemView) {
             super(itemView);
 
@@ -91,21 +94,74 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 @Override
                 public void onClick(View v) {
 
-                    Intent i = new Intent(context, MainActivity.class);
-                    // 유저가 클릭한 셀의 인덱스를 가져온다. 이 인덱스만 알면, 어레이리스트에서 데이터 꺼내올 수 있다.
+                    AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                    View alertView = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.update_dialog,null);
+
+                    editName = alertView.findViewById(R.id.editName);
+                    editPhone = alertView.findViewById(R.id.editPhone);
+                    btnSave = alertView.findViewById(R.id.btnSave);
+                    btnCancle = alertView.findViewById(R.id.btnCancle);
+
                     int index = getAdapterPosition();
                     Contact contact = contactList.get(index);
-                    int id = contact.getId();
+                    id = contact.getId();
                     String name = contact.getName();
                     String phone = contact.getPhone_number();
-                    // 업데이트 액티비티로 데이터 넘겨줄 수 있다.
-                    i.putExtra("id",id);
-                    i.putExtra("name",name);
-                    i.putExtra("phone",phone);
+
+                    // 어댑터에서, 유저가 클릭한 경우, 에디트 텍스트에 보여준다.
+                    editName.setText(name);
+                    editPhone.setText(phone);
+
+                    btnSave.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            // 데이터베이스에 업데이트.
+                            // 유저가 변경했을 수 있는 이름과 폰번을, 에디트 텍스트에서 가져온다.
+                            String name = editName.getText().toString().trim();
+                            String phone = editPhone.getText().toString().trim();
+
+                            // 디비핸들러 클래스를 통해서 업데이트
+                            DatabaseHandler db = new DatabaseHandler(context);
+                            Contact contact = new Contact(id, name, phone);
+                            db.updateContact(contact);
+                            // 토스트를 보여준다.
+                            Toast.makeText(context, "수정되었습니다.",Toast.LENGTH_SHORT).show();
+                            // 이 액티비티 종료.
+//                            finish();
+
+                            dialog.cancel();
+                        }
+                    });
+
+                    btnCancle.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.cancel();
+                        }
+                    });
+
+                    alert.setView(alertView);
+                    alert.setCancelable(false);
+
+                    dialog = alert.create();
+                    dialog.show();
+
+
+//                    Intent i = new Intent(context, MainActivity.class);
+//                    // 유저가 클릭한 셀의 인덱스를 가져온다. 이 인덱스만 알면, 어레이리스트에서 데이터 꺼내올 수 있다.
+//                    int index = getAdapterPosition();
+//                    Contact contact = contactList.get(index);
+//                    int id = contact.getId();
+//                    String name = contact.getName();
+//                    String phone = contact.getPhone_number();
+//                    // 업데이트 액티비티로 데이터 넘겨줄 수 있다.
+//                    i.putExtra("id",id);
+//                    i.putExtra("name",name);
+//                    i.putExtra("phone",phone);
 
                     // 새로운 화면을 띄우는 startActivity 함수는, 액티비티 클래스의 메소드 이므로,
                     // context.startActivity 해야함. 왜냐면, context == MainActivity.this
-                    context.startActivity(i);
+//                    context.startActivity(i);
 
                     // 수정 액티비티로 넘어가는 코드 작성.
 //                    Toast.makeText(context, "이 셀은 " + getAdapterPosition() + "번째 셀입니다.", Toast.LENGTH_SHORT).show();
