@@ -15,8 +15,9 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT"/>
-
-                <action android:name="android.intent.action.SEND" />
+                <action android:name="android.intent.action.SENDTO" />
+                <action android:name="android.intent.action.SET_ALARM" />
+                <data android:scheme="mailto" />
                 <data android:mimeType="text/plain"/>
                 <data android:mimeType="image/*" />
 

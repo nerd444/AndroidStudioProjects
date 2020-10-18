@@ -20,7 +20,6 @@ public class SignUpActivity extends AppCompatActivity {
         // 메인 액티비티로부터, 데이터를 받는 코드.
         String email = getIntent().getStringExtra("email");
         // 위 두줄 또는 ==> String email = getIntent().getStringExtra("email");
-
         welcome.setText(email+" 님 회원가입을 축하합니다.");
 
     }
