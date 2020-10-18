@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        app:cardBackgroundColor="#F5CFFA"
+        app:cardBackgroundColor="#DFE2F3"
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp"
         android:layout_width="match_parent"
@@ -36,10 +36,11 @@
 
                 <ImageView
                     android:id="@+id/imgDelete"
-                    app:srcCompat="@android:drawable/ic_delete"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:tint="#000000"
+                    app:srcCompat="@android:drawable/ic_delete" />
             </LinearLayout>
 
             <TextView
