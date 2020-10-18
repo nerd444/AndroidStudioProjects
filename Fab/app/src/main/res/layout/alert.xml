@@ -69,5 +69,6 @@
         android:layout_marginTop="20dp"
         android:background="@color/colorAccent"
         android:text="Save"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textColor="#ffffff"/>
 </LinearLayout>
