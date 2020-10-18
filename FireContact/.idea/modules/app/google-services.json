@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "174154429539",
+    "firebase_url": "https://firecontact-b43ef.firebaseio.com",
+    "project_id": "firecontact-b43ef",
+    "storage_bucket": "firecontact-b43ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:174154429539:android:ec0a2e269d57225909f456",
+        "android_client_info": {
+          "package_name": "com.nerd.firecontact"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "174154429539-ua17qsonk4gh5mukp7nvpis0666o3kkn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nerd.firecontact",
+            "certificate_hash": "8a7f9aa42c946167815ba87664a63d23490ce8cd"
+          }
+        },
+        {
+          "client_id": "174154429539-n2sh2u8ct1514nv97el4unfsb4jmrnrg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvr2CVIy6WOlcT7c2dA7j8PoPhhKe18eE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "174154429539-n2sh2u8ct1514nv97el4unfsb4jmrnrg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

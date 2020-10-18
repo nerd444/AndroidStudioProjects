@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.nerd.firecontact.model.Contact;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddContact extends AppCompatActivity {
 
@@ -22,7 +25,7 @@ public class AddContact extends AppCompatActivity {
     EditText editPhone;
     Button btnSave;
 
-    public static final String KEY_TITLE = "title";
+    public static final String COLLECTION_NAME = "Contact";
     public static final String KEY_THOUGHT = "thought";
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -44,12 +47,17 @@ public class AddContact extends AppCompatActivity {
                 String name = editName.getText().toString().trim();
                 String phone = editPhone.getText().toString().trim();
 
+//                Map<String, Object> contact = new HashMap<>();
+//                contact.put("name", name);
+//                contact.put("phone_number", phone);
+
                 final Contact contact = new Contact(name, phone);
                 db.collection("Contact").add(contact)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
                                 contactArrayList.add(contact);
+                                Log.i("TAG",documentReference.getId());
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
