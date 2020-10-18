@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 if (tabCount == 0){
-                        return;
+                    return;
                 }
 
                 tabCount = tabCount - 1;
