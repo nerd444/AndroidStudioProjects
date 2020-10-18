@@ -28,6 +28,7 @@
         android:layout_marginHorizontal="50dp"
         android:layout_marginTop="80dp"
         android:ems="10"
+        android:fontFamily="@font/bmeuljiro"
         android:hint="제목"
         android:inputType="textPersonName"
         android:textSize="24sp" />
@@ -39,6 +40,7 @@
         android:layout_marginHorizontal="50dp"
         android:layout_marginTop="5dp"
         android:ems="10"
+        android:fontFamily="@font/bmeuljiro"
         android:hint="내용"
         android:inputType="textPersonName"
         android:textSize="24sp" />
@@ -50,6 +52,7 @@
         android:layout_marginHorizontal="50dp"
         android:layout_marginTop="80dp"
         android:background="#B3E2F8"
+        android:fontFamily="@font/bmeuljiro"
         android:text="저장"
         android:textColor="#000000"
         android:textSize="20sp" />

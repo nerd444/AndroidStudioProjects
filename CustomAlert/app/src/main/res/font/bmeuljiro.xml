@@ -3,6 +3,5 @@
     <font
         android:fontStyle="normal"
         android:fontWeight="900"
-        android:font="@font/myfather" />
-
+        android:font="@font/bmeuljirottf" />
 </font-family>

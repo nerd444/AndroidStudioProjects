@@ -39,7 +39,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     RequestQueue requestQueue;
-    public static final String URL = "https://jsonplaceholder.typicode.com/posts ";
+    public static final String URL = "https://jsonplaceholder.typicode.com/posts";
     RecyclerView recyclerView;
     RecyclerViewAdapter recyclerViewAdapter;
     ArrayList<CustomAlert> customAlertArrayList = new ArrayList<>();
