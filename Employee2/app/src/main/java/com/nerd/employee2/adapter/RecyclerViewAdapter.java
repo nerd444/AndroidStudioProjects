@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.nerd.employee2.R;
 import com.nerd.employee2.model.Employee;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
@@ -45,11 +46,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         String name = employee.getEmployee_name();
         int age = employee.getEmployee_age();
         int salary = employee.getEmployee_salary();
+        DecimalFormat format = new DecimalFormat("###,###");//콤마
+        String format_salary = format.format(salary);
 
         // 2. 뷰홀더에 있는 텍스트뷰에 문자열을 셋팅한다.(= 화면에 셋팅.)
         holder.txtName.setText(name);
         holder.txtAge.setText("나이 : "+age+"세");     // 문자열 + int = 문자열.
-        holder.txtSalary.setText("연봉 : $"+salary);
+        holder.txtSalary.setText("연봉 : $"+format_salary);
 
     }
 
@@ -77,7 +80,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             txtAge = itemView.findViewById(R.id.txtAge);
             txtSalary = itemView.findViewById(R.id.txtSalary);
             img = itemView.findViewById(R.id.img);
-            img.setImageResource(R.drawable.img);
 
         }
     }

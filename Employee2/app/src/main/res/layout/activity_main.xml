@@ -15,7 +15,8 @@
         android:gravity="center"
         android:text="직원 리스트"
         android:textColor="#000000"
-        android:textSize="28sp" />
+        android:textSize="28sp"
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
