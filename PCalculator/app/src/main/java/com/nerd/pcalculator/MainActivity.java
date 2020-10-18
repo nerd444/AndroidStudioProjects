@@ -50,16 +50,6 @@ public class MainActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        BottomNavigationView navigationView = findViewById(R.id.navi);
-        NavController navController = Navigation.findNavController(this, R.id.fragment);
-        NavigationUI.setupWithNavController(navigationView, navController);
-
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.fragment1, R.id.fragment2,R.id.fragment3,R.id.fragment4).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
-        NavigationUI.setupWithNavController(navigationView, navController);
-
         percent = findViewById(R.id.percent);
         number = findViewById(R.id.number);
         button = findViewById(R.id.button);
