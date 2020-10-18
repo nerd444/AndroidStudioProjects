@@ -17,11 +17,10 @@
 
     <Button
         android:id="@+id/btn"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
         android:layout_marginTop="360dp"
-        android:layout_marginEnd="162dp"
+        android:layout_marginHorizontal="50dp"
         android:background="#000000"
         android:text="network status"
         android:textColor="#FFEB3B"

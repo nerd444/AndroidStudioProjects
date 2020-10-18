@@ -31,29 +31,33 @@ public class MainActivity extends AppCompatActivity {
         Log.i("Parsing","onCreate 함수");
 
         RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Log.i("Parsing",response.toString());
-                try {
-                    int userId = response.getInt("userId");
-                    int id = response.getInt("id");
-                    String title = response.getString("title");
-                    boolean completed = response.getBoolean("completed");
-                    Log.i("Parsing","UserID : " + userId);
-                    Log.i("Parsing","id : " + id);
-                    Log.i("Parsing","title : " + title);
-                    Log.i("Parsing","completed : " + completed);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.i("Parsing","error : " + error.toString());
-            }
-        });
-    requestQueue.add(jsonObjectRequest);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                     public void onResponse(JSONObject response) {
+                         Log.i("Parsing",response.toString());
+                         try {
+                            int userId = response.getInt("userId");
+                            int id = response.getInt("id");
+                            String title = response.getString("title");
+                            boolean completed = response.getBoolean("completed");
+                            Log.i("Parsing","UserID : " + userId);
+                            Log.i("Parsing","id : " + id);
+                            Log.i("Parsing","title : " + title);
+                            Log.i("Parsing","completed : " + completed);
+                        } catch (JSONException e) {
+                             e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i("Parsing","error : " + error.toString());
+                    }
+                });
+        requestQueue.add(jsonObjectRequest);
     }
 }
