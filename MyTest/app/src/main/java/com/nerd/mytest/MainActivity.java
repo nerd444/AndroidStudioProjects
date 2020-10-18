@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
         imgCenter = findViewById(R.id.imgCenter);
 
         // 버튼을 클릭하면, 로그에 "버튼 클릭 됨" 을 찍도록 코드 작성
-        Button btnclick = findViewById(R.id.btnClick);
-        btnclick.setOnClickListener(new View.OnClickListener() {
+        Button btnClick = findViewById(R.id.btnClick);
+        btnClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i("MyTest","버튼 클릭 ok");
