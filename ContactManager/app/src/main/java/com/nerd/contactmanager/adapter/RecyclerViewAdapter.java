@@ -145,27 +145,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
                     dialog = alert.create();
                     dialog.show();
-
-
-//                    Intent i = new Intent(context, MainActivity.class);
-//                    // 유저가 클릭한 셀의 인덱스를 가져온다. 이 인덱스만 알면, 어레이리스트에서 데이터 꺼내올 수 있다.
-//                    int index = getAdapterPosition();
-//                    Contact contact = contactList.get(index);
-//                    int id = contact.getId();
-//                    String name = contact.getName();
-//                    String phone = contact.getPhone_number();
-//                    // 업데이트 액티비티로 데이터 넘겨줄 수 있다.
-//                    i.putExtra("id",id);
-//                    i.putExtra("name",name);
-//                    i.putExtra("phone",phone);
-
-                    // 새로운 화면을 띄우는 startActivity 함수는, 액티비티 클래스의 메소드 이므로,
-                    // context.startActivity 해야함. 왜냐면, context == MainActivity.this
-//                    context.startActivity(i);
-
-                    // 수정 액티비티로 넘어가는 코드 작성.
-//                    Toast.makeText(context, "이 셀은 " + getAdapterPosition() + "번째 셀입니다.", Toast.LENGTH_SHORT).show();
-                    // getAdapterPosition() 함수는, 현재 내가 클릭한 부분이, 몇번째 셀인지 알려준다.
                 }
             });
 
